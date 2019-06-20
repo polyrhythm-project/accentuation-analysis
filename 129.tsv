@@ -1,43 +1,85 @@
-ticks	cbeat	notes	voices
-0	0	2	2
-8	0.166667	2	2
-16	0.333333	4	2
-24	0.5	2	1
-32	0.666667	2	1
-36	0.75	1	1
-40	0.833333	1	1
-48	1	3	3
-51	1.0625	1	1
-54	1.125	1	1
-56	1.16667	1	1
-57	1.1875	1	1
-60	1.25	2	2
-63	1.3125	1	1
-64	1.33333	2	1
-66	1.375	1	1
-69	1.4375	1	1
-72	1.5	2	2
-80	1.66667	1	1
-84	1.75	1	1
-88	1.83333	2	1
-96	2	2	2
-104	2.16667	1	1
-112	2.33333	2	1
-120	2.5	1	1
-128	2.66667	1	1
-132	2.75	1	1
-136	2.83333	2	1
-144	3	3	3
-147	3.0625	1	1
-150	3.125	1	1
-152	3.16667	1	1
-153	3.1875	1	1
-156	3.25	2	2
-159	3.3125	1	1
-160	3.33333	2	1
-162	3.375	1	1
-165	3.4375	1	1
-168	3.5	2	2
-176	3.66667	1	1
-180	3.75	1	1
-184	3.83333	2	1
+cat	position	events
+notes	0	2
+notes	8	2
+notes	16	4
+notes	24	2
+notes	32	2
+notes	36	1
+notes	40	1
+notes	48	3
+notes	51	1
+notes	54	1
+notes	56	1
+notes	57	1
+notes	60	2
+notes	63	1
+notes	64	2
+notes	66	1
+notes	69	1
+notes	72	2
+notes	80	1
+notes	84	1
+notes	88	2
+notes	96	2
+notes	104	1
+notes	112	2
+notes	120	1
+notes	128	1
+notes	132	1
+notes	136	2
+notes	144	3
+notes	147	1
+notes	150	1
+notes	152	1
+notes	153	1
+notes	156	2
+notes	159	1
+notes	160	2
+notes	162	1
+notes	165	1
+notes	168	2
+notes	176	1
+notes	180	1
+notes	184	2
+voices	0	2
+voices	8	2
+voices	16	2
+voices	24	1
+voices	32	1
+voices	36	1
+voices	40	1
+voices	48	3
+voices	51	1
+voices	54	1
+voices	56	1
+voices	57	1
+voices	60	2
+voices	63	1
+voices	64	1
+voices	66	1
+voices	69	1
+voices	72	2
+voices	80	1
+voices	84	1
+voices	88	1
+voices	96	2
+voices	104	1
+voices	112	1
+voices	120	1
+voices	128	1
+voices	132	1
+voices	136	1
+voices	144	3
+voices	147	1
+voices	150	1
+voices	152	1
+voices	153	1
+voices	156	2
+voices	159	1
+voices	160	1
+voices	162	1
+voices	165	1
+voices	168	2
+voices	176	1
+voices	180	1
+voices	184	1

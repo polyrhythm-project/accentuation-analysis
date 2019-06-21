@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+  "data": {
+    "url": "https://polyrhythm-project.github.io/vegalitetest/129abgroup_cat.tsv"
+  },
+  "layer": [
+    {
+      "width": 3000,
+      "height": 300,
+      "mark": {
+        "type": "bar",
+        "opacity": 0.9
+      },
+      "encoding": {
+        "x": {
+          "field": "position",
+          "type": "temporal",
+          "axis": {
+            "format": "%-Y"
+          }
+        },
+        "y": {
+          "field": "notesA",
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "width": 3000,
+      "height": 300,
+      "mark": {
+        "type": "bar",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "position",
+          "type": "temporal",
+          "axis": {
+            "format": "%-Y"
+          }
+        },
+        "y": {
+          "field": "notesB",
+          "type": "quantitative"
+        },
+        "color": {
+          "value": "#7EF9FF"
+        }
+      }
+    }
+  ],
+  "config": {
+    "range": {
+      "category": {
+        "scheme": "category10"
+      }
+    },
+    "bar": {
+      "continuousBandSize": 16
+    }
+  }
+}

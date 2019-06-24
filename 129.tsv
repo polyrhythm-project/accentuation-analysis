@@ -1,85 +1,43 @@
-cat	position	events
-notes	0	2
-notes	8	2
-notes	16	4
-notes	24	2
-notes	32	2
-notes	36	1
-notes	40	1
-notes	48	3
-notes	51	1
-notes	54	1
-notes	56	1
-notes	57	1
-notes	60	2
-notes	63	1
-notes	64	2
-notes	66	1
-notes	69	1
-notes	72	2
-notes	80	1
-notes	84	1
-notes	88	2
-notes	96	2
-notes	104	1
-notes	112	2
-notes	120	1
-notes	128	1
-notes	132	1
-notes	136	2
-notes	144	3
-notes	147	1
-notes	150	1
-notes	152	1
-notes	153	1
-notes	156	2
-notes	159	1
-notes	160	2
-notes	162	1
-notes	165	1
-notes	168	2
-notes	176	1
-notes	180	1
-notes	184	2
-voices	0	2
-voices	8	2
-voices	16	2
-voices	24	1
-voices	32	1
-voices	36	1
-voices	40	1
-voices	48	3
-voices	51	1
-voices	54	1
-voices	56	1
-voices	57	1
-voices	60	2
-voices	63	1
-voices	64	1
-voices	66	1
-voices	69	1
-voices	72	2
-voices	80	1
-voices	84	1
-voices	88	1
-voices	96	2
-voices	104	1
-voices	112	1
-voices	120	1
-voices	128	1
-voices	132	1
-voices	136	1
-voices	144	3
-voices	147	1
-voices	150	1
-voices	152	1
-voices	153	1
-voices	156	2
-voices	159	1
-voices	160	1
-voices	162	1
-voices	165	1
-voices	168	2
-voices	176	1
-voices	180	1
-voices	184	1
+measure	notesA	position	notesB
+1	2	0	0
+1	2	8	0
+1	4	16	0
+1	2	24	0
+1	2	32	0
+1	1	36	0
+1	1	40	0
+2	2	48	1
+2	0	51	1
+2	0	54	1
+2	1	56	0
+2	0	57	1
+2	1	60	1
+2	0	63	1
+2	2	64	0
+2	0	66	1
+2	0	69	1
+2	2	72	0
+2	1	80	0
+2	1	84	0
+2	2	88	0
+3	2	96	0
+3	1	104	0
+3	2	112	0
+3	1	120	0
+3	1	128	0
+3	1	132	0
+3	2	136	0
+4	2	144	1
+4	0	147	1
+4	0	150	1
+4	1	152	0
+4	0	153	1
+4	1	156	1
+4	0	159	1
+4	2	160	0
+4	0	162	1
+4	0	165	1
+4	2	168	0
+4	1	176	0
+4	1	180	0
+4	2	184	0

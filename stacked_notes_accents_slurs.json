@@ -4,6 +4,8 @@
     "url": "https://polyrhythm-project.github.io/vegalitetest/161.tsv",
     "format": {"parse": {"position": "number"}}
   },
+  "transform": [{"calculate": "if(datum.cat==0, 0, datum.events)", "as": "eventsX"}
+  ],
   "layer": [
     {
       "width": 1000,
@@ -18,7 +20,7 @@
           "sort": "ascending"
         },
         "y": {
-          "field": "events",
+          "field": "eventsX",
           "type": "quantitative",
           "impute": {"value": "0"}
         },

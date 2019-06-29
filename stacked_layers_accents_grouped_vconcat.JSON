@@ -32,11 +32,9 @@
   "vconcat": [
     {
       "height": 200,
+      "width": 5000,
       "layer":[
         {
-          "selection": {
-            "brush": {"type": "interval"}
-          },
           "mark": {
             "type": "bar",
             "opacity": 0.005,
@@ -67,8 +65,7 @@
               "field": "notesA",
               "type": "quantitative",
               "impute": {"value": 0},
-              "title": "Group 1",
-              "scale": {"domain": {"selection": "brush"}}
+              "title": "Group 1"
             },
             "color": {
               "field": "category",
@@ -86,9 +83,6 @@
             "type": "bar",
             "opacity": 0.005,
             "color": "#000000"
-          },
-          "selection": {
-            "brush": {"type": "interval", "encodings": ["x"]}
           },
           "encoding": {
             "x": {
@@ -115,8 +109,7 @@
               "field": "notesB",
               "type": "quantitative",
               "impute": {"value": 0},
-              "title": "Group 2",
-              "scale": {"domain": [0, 5]}
+              "title": "Group 2"
             },
             "color": {
               "field": "category",
@@ -126,7 +119,10 @@
         }
       ]
     }
-  ],
+  ], 
+  "resolve": {
+    "scale": {"y": "shared"}
+  },
   "config": {
     "range": {
       "category": [

@@ -2,28 +2,79 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
   "data": {
     "url": "https://polyrhythm-project.github.io/vegalitetest/129S.tsv",
-    "format": {"parse": {"position": "number"}}
+    "format": {"parse": 
+      {"position": "number", "measure": "number", "notesA": "number", "notesB": "number"}
+    }
   },
   "transform": [
+    {"calculate": "-datum.notesB", "as": "notesBX"},
     {
       "joinaggregate": [{
         "op": "min",
         "field": "position",
-        "as": "measureminpos"
+        "as": "measureminposfull"
       }],
       "groupby": [
         "measure"
       ]
     },
-    {"calculate": "-datum.notesB", "as": "notesBX"}
-  ],
-  "layer": [
+    {"calculate": "if(datum.measure==2, datum.measureminposfull, 0)", "as": "measureleninc"},
     {
-      "width": 3000,
-      "height": 300,
+      "joinaggregate": [{
+        "op": "max",
+        "field": "measureleninc",
+        "as": "measurelenfull"
+      }]
+    },
+    {"calculate": "datum.measureminposfull + datum.measurelenfull", "as": "measuremaxposfull"},
+    {"calculate": "if(datum.measure%2!=0, datum.measureminposfull, 0)", "as": "measureminposalt"},
+    {"calculate": "if(datum.measure%2!=0, datum.measuremaxposfull, 0)", "as": "measuremaxposalt"}
+  ],
+  "height": 200,
+  "layer": [    
+    {
       "mark": {
         "type": "bar",
-        "opacity": 1
+        "opacity": 0.005,
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": {
+          "field": "measureminposalt",
+          "type": "ordinal"
+        },
+        "x2": {
+          "field": "measuremaxposalt"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar",
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {
+          "field": "position",
+          "type": "ordinal",
+          "sort": "ascending",
+          "title": "Tick Position"
+        },
+        "y": {
+          "field": "notesBX",
+          "type": "quantitative",
+          "impute": {"value": 0},
+          "title": "Group 2"
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal"
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "bar"
       },
       "encoding": {
         "x": {
@@ -34,49 +85,26 @@
         "y": {
           "field": "notesA",
           "type": "quantitative",
-          "impute": {"value": "0"}
+          "impute": {"value": 0},
+          "title": "Group 1"
         },
         "color": {
-          "field": "cat",
+          "field": "category",
           "type": "nominal"
         }
       }
     },
     {
-      "width": 3000,
-      "height": 300,
-      "mark": {
-        "type": "bar",
-        "opacity": 0.5
-      },
-      "encoding": {
-        "x": {
-          "field": "position",
-          "type": "ordinal",
-          "sort": "ascending"
-        },
-        "y": {
-          "field": "notesBX",
-          "type": "quantitative",
-          "impute": {"value": "0"}
-        },
-        "color": {
-          "field": "cat",
-          "type": "nominal"
-        }
-      }
-    },
-    {
-      "width": 3000,
-      "height": 300,
       "mark": {
         "type": "rule",
-        "opacity": 0.1
+        "opacity": 1
       },
       "encoding": {
-        "x": {
-          "field": "measureminpos",
-          "type": "ordinal"
+        "y": {
+          "aggregate": "min",
+          "field": "notesA",
+          "type": "quantitative",
+          "axis": {"format": "(d"}
         }
       }
     }
@@ -98,7 +126,14 @@
       ]
     },
     "bar": {
-      "continuousBandSize": 16
+      "continuousBandSize": 200,
+      "discreteBandSize": 13
+    },
+    "axis": {
+      "titleFontSize": 14
+    },
+    "axisY": {
+      "titleY": 165
     }
   }
 }

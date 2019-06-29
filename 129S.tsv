@@ -1,4 +1,20 @@
 measure	notesA	position	notesB	category
+1	1	8	0	Accents
+1	1	16	0	Accents
+1	1	24	0	Accents
+1	1	32	0	Accents
+2	1	56	0	Accents
+2	1	64	0	Accents
+2	1	80	0	Accents
+2	1	88	0	Accents
+3	1	104	0	Accents
+3	1	112	0	Accents
+3	1	128	0	Accents
+3	1	136	0	Accents
+4	1	152	0	Accents
+4	1	160	0	Accents
+4	1	176	0	Accents
+4	1	184	0	Accents
 1	2	0	0	Notes
 1	2	8	0	Notes
 1	4	16	0	Notes
@@ -49,22 +65,6 @@ measure	notesA	position	notesB	category
 3	1	120	0	Slurs
 4	2	144	0	Slurs
 4	1	168	0	Slurs
-1	1	8	0	Accents
-1	1	16	0	Accents
-1	1	24	0	Accents
-1	1	32	0	Accents
-2	1	56	0	Accents
-2	1	64	0	Accents
-2	1	80	0	Accents
-2	1	88	0	Accents
-3	1	104	0	Accents
-3	1	112	0	Accents
-3	1	128	0	Accents
-3	1	136	0	Accents
-4	1	152	0	Accents
-4	1	160	0	Accents
-4	1	176	0	Accents
-4	1	184	0	Accents
 		0		
 		1		
 		2		

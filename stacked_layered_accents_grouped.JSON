@@ -300,6 +300,6 @@
     "axis": {
       "titleFontSize": 14
     },
-    "square": {"size": 120, "stroke": "0.5"}
+    "square": {"size": 120, "strokeWidth": 1.5, "stroke": "#888888"}
   }
 }

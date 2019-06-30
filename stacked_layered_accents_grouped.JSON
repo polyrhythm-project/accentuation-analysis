@@ -25,6 +25,11 @@
         "label": "Slurs",
         "x_min": 1,
         "y_med": 44
+      },
+      {
+        "label": "None",
+        "x_min": 1,
+        "y_med": 22
       }
     ]
   },
@@ -139,7 +144,7 @@
         }
       ]
     },
-      {
+    {
     "mark": {
       "type": "square"
     },

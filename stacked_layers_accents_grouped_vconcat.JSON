@@ -4,9 +4,9 @@
     "text": "Stacked Accentual Features per Group"
   },
   "data": {
-    "url": "https://polyrhythm-project.github.io/vegalitetest/129S.tsv",
+    "url": "https://polyrhythm-project.github.io/vegalitetest/129T.tsv",
     "format": {"parse": 
-      {"Position": "number", "Measure": "number", "NotesA": "number", "NotesB": "number"}
+      {"Position": "number", "Measure": "number", "Notes": "number"}
     }
   },
   "datasets": {
@@ -17,17 +17,17 @@
         "y_med": 88
       },
       {
-        "label": "Accents",
+        "label": "Slurs",
         "x_min": 1,
         "y_med": 66
       },
       {
-        "label": "Slurs",
+        "label": "Accents",
         "x_min": 1,
         "y_med": 44
       },
       {
-        "label": "None",
+        "label": "Expand Positions",
         "x_min": 1,
         "y_med": 22
       }
@@ -56,96 +56,145 @@
     {"calculate": "if(datum.Measure%2!=0, datum.MeasureStartFull, 0)", "as": "MeasureStart"},
     {"calculate": "if(datum.Measure%2!=0, datum.MeasureEndFull, 0)", "as": "MeasureEnd"}
   ],
-  "vconcat": [
+  "hconcat": [
     {
-      "height": 200,
-      "layer":[
-        {
-          "mark": {
-            "type": "bar",
-            "opacity": 0.005,
-            "color": "#000000"
-          },
-          "encoding": {
-            "x": {
-              "field": "MeasureStart",
-              "type": "ordinal"
+      "facet": {"row": {"field": "Group", "type": "nominal"}},
+      "spec": {
+        "height": 200,
+        "layer":[
+          {
+            "mark": {
+              "type": "bar",
+              "opacity": 0.005,
+              "color": "#000000"
             },
-            "x2": {
-              "field": "MeasureEnd"
+            "encoding": {
+              "x": {
+                "field": "MeasureStart",
+                "type": "ordinal"
+              },
+              "x2": {
+                "field": "MeasureEnd"
+              }
             }
-          }
-        },
-        {
-          "mark": {
-            "type": "bar"
           },
-          "encoding": {
-            "x": {
-              "field": "Position",
-              "type": "ordinal",
-              "sort": "ascending",
-              "title": "Tick Position"
+          {
+            "mark": {
+              "type": "bar"
             },
-            "y": {
-              "field": "NotesA",
-              "type": "quantitative",
-              "impute": {"value": 0},
-              "title": "Group 1"
+            "encoding": {
+              "x": {
+                "field": "Position",
+                "type": "ordinal",
+                "sort": "ascending",
+                "title": "Tick Position"
+              },
+              "y": {
+                "field": "Notes",
+                "type": "quantitative",
+                "impute": {"value": 0}
+              },
+              "color": {
+                "field": "Category",
+                "type": "nominal",
+                "legend": null
+              }
             },
-            "color": {
-              "field": "Category",
-              "type": "nominal"
-            }
+            "transform": [{"filter": {"selection": "legend"}}]
           }
-        }
-      ]     
+        ]     
+      }
     },
     {
-      "height": 200,
-      "layer":[
-        {
-          "mark": {
-            "type": "bar",
-            "opacity": 0.005,
-            "color": "#000000"
+      "mark": {
+        "type": "square"
+      },
+      "encoding": {
+        "color": {
+          "condition": {
+            "type": "nominal",
+            "aggregate": "min",
+            "field": "Category",
+            "legend": null,
+            "selection": "legend"
           },
-          "encoding": {
-            "x": {
-              "field": "MeasureStart",
-              "type": "ordinal"
-            },
-            "x2": {
-              "field": "MeasureEnd"
-            }
-          }
+          "value": "lightgray"
         },
-        {
-          "mark": {
-            "type": "bar"
-          },
-          "encoding": {
-            "x": {
-              "field": "Position",
-              "type": "ordinal",
-              "sort": "ascending",
-              "title": "Tick Position"
-            },
-            "y": {
-              "field": "NotesB",
-              "type": "quantitative",
-              "impute": {"value": 0},
-              "title": "Group 2"
-            },
-            "color": {
-              "field": "Category",
-              "type": "nominal"
-            }
+        "y": {
+          "type": "nominal",
+          "field": "Category",
+          "title": "On/Off",
+          "sort": null,
+          "axis": {
+            "ticks": false,          
+            "labelPadding": 10,
+            "titleAngle": 0,
+            "titleX": 10,
+            "titleY": -10,
+            "labels": false
           }
         }
-      ]
+      },
+      "selection": {
+        "legend": {
+          "type": "multi",
+          "encodings": ["color"],
+          "on": "click",
+          "toggle": "event.shiftKey",
+          "resolve": "global",
+          "empty": "all"
+        }
+      }
+    },
+    {
+      "width": 100,
+      "height": 80,
+      "mark": {
+        "dx": 0,
+        "dy": 8,
+        "size": 10,
+        "type": "text"
+      },
+      "data": {
+        "name": "LegendData"
+      },
+      "encoding": {
+        "text": {
+          "field": "label",
+          "type": "ordinal"
+        },
+        "x": {
+          "axis": {
+            "labels": false,
+            "domain": false,
+            "ticks": false,
+            "grid": false
+          },          
+          "field": "x_min",
+          "title": null,
+          "scale": {
+            "zero": false
+          },
+          "type": "quantitative"
+        },
+        "y": {
+          "axis": {
+            "labels": false,
+            "domain": false,
+            "ticks": false,
+            "grid": false,
+            "labelPadding": 10,
+            "titleAngle": 0,
+            "titleX": 45,
+            "titleY": -10
+          },
+          "field": "y_med",
+          "type": "quantitative",
+          "title": "Features"
+        }
+      }
     }
-  ], 
+  ],
   "resolve": {
     "scale": {"y": "shared"}
   },
@@ -172,6 +221,6 @@
     "axis": {
       "titleFontSize": 14
     },
-    "square": {"size": 100}
+    "square": {"size": 100, "stroke": "0.5"}
   }
 }

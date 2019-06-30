@@ -1,3 +1,4 @@
+    
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
   "title": {
@@ -17,17 +18,17 @@
         "y_med": 88
       },
       {
-        "label": "Accents",
+        "label": "Slurs",
         "x_min": 1,
         "y_med": 66
       },
       {
-        "label": "Slurs",
+        "label": "Accents",
         "x_min": 1,
         "y_med": 44
       },
       {
-        "label": "None",
+        "label": "Expand Positions",
         "x_min": 1,
         "y_med": 22
       }
@@ -186,7 +187,7 @@
       }
     },
     {
-      "width": 50,
+      "width": 100,
       "height": 80,
       "mark": {
         "dx": 0,
@@ -224,7 +225,7 @@
             "grid": false,
             "labelPadding": 10,
             "titleAngle": 0,
-            "titleX": 25,
+            "titleX": 45,
             "titleY": -10
           },
           "field": "y_med",
@@ -299,6 +300,6 @@
     "axis": {
       "titleFontSize": 14
     },
-    "square": {"size": 100}
+    "square": {"size": 120, "stroke": "0.5"}
   }
 }

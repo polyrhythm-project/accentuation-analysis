@@ -1,0 +1,25 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $accentfeatures = `which accent-features`;
+chomp $accentfeatures;
+if ($accentfeatures =~ /^\s*$/) {
+	die "You need to install humlib first\n";
+}
+
+my $sourcedir = "../../polyrhythm-scores/kern";
+my @files = glob("$sourcedir/*.krn");
+if (@files == 0) {
+	die "You need to download the polyrhythm score repository first\n";
+}
+
+foreach my $file (@files) {
+	my $base = $file;
+	$base =~ s/.*\///;
+	$base =~ s/\.krn//;
+	$base =~ s/_.*//;
+	print "Processing $base ...\n";
+	`$accentfeatures -t $file > $base.tsv`;
+}
+

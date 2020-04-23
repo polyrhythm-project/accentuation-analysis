@@ -1,0 +1,6 @@
+Currently, the plot shows all data as expected. However, since only 4 different types of accentuation are present in the data to begin
+with, then only 4 colors appear in the legend.
+
+1. Make accentual features to appear dynamically using js
+2. Check if colors are fixed this time (only checked on couple of plots)
+3. Dividing line should appear at 0, not 1

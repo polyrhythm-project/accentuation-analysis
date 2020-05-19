@@ -12,64 +12,24 @@
   "datasets": {
     "LegendData": [
       {
+        "label": "Slur beginning",
+        "x_min": 1,
+        "y_med": 240
+      },
+      {
         "label": "Note",
-        "x_min": 1,
-        "y_med": 254
-      },
-      {
-        "label": "Accent",
-        "x_min": 1,
-        "y_med": 242
-      },
-      {
-        "label": "Marcato",
         "x_min": 1,
         "y_med": 220
       },
       {
-        "label": "Sforzando",
+        "label": "Slur end",
         "x_min": 1,
-        "y_med": 198
-      },
-      {
-        "label": "Tenuto",
-        "x_min": 1,
-        "y_med": 176
+        "y_med": 200
       },
       {
         "label": "Staccato",
         "x_min": 1,
-        "y_med": 154
-      },
-      {
-        "label": "Trill",
-        "x_min": 1,
-        "y_med": 132
-      },
-      {
-        "label": "Mordent",
-        "x_min": 1,
-        "y_med": 110
-      },
-      {
-        "label": "Turn",
-        "x_min": 1,
-        "y_med": 88
-      },
-      {
-        "label": "Slur Beginning",
-        "x_min": 1,
-        "y_med": 66
-      },
-      {
-        "label": "Slur Ending",
-        "x_min": 1,
-        "y_med": 44
-      },
-      {
-        "label": "Expand Positions",
-        "x_min": 1,
-        "y_med": 22
+        "y_med": 180
       }
     ]
   },
@@ -106,7 +66,7 @@
               "field": "NotesBX",
               "type": "quantitative",
               "impute": {"value": 0},
-              "title": "Group 2",
+              "title": "Group A",
               "sort": null
             },
             "color": {
@@ -131,7 +91,7 @@
               "field": "NotesA",
               "type": "quantitative",
               "impute": {"value": 0},
-              "title": "Group 1"
+              "title": "Group B"
             },
             "color": {
               "field": "Category",
@@ -149,7 +109,7 @@
           "encoding": {
             "y": {
               "aggregate": "min",
-              "field": "NotesA",
+              "field": "qstart",
               "type": "quantitative",
               "axis": {"format": "(d"}
             }
@@ -174,7 +134,7 @@
       "y": {
         "type": "nominal",
         "field": "Category",
-        "title": "Group 1",
+        "title": "Group B",
         "sort": null,
         "axis": {
           "ticks": false,          
@@ -263,7 +223,7 @@
         "y": {
           "type": "nominal",
           "field": "Category",
-          "title": "Group 2",
+          "title": "Group A",
           "sort": null,
           "axis": {
             "ticks": false,

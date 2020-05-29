@@ -1,0 +1,572 @@
+<html>
+   <head>
+      <title>Embedding Vega-Lite</title>
+      <script src="https://cdn.jsdelivr.net/npm/vega@5.11.1"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.12.0"></script>
+      <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.7.1"></script>
+      <script src="https://vega.github.io/vega/vega.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   </head>
+   <body>
+      <p>Attack</p>
+      <div id="vis"></div>
+      <select name="graphChoice" id="graphChoice">
+         <option value="count">Count</option>
+         <option value="onoff">On Off</option>
+      </select>
+      <script type="text/javascript">
+         var countVis = {
+         "$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.1.json",
+         "title": {
+         "text": "Stacked Accentual Features per Group"
+         },
+         "data": {
+         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/output.tsv",
+         "format": {"parse": 
+         {"line": "number", "field":"number", "track":"number", "subtrack":"number", "group":"number", "staff":"number", "measure":"number", "qstart":"number", "tstart":"number", "qdur":"number", "tdur":"number", "pitch":"number", "chord":"number", "accent":"number", "marcato":"number", "sforzando":"number", "tenuto":"number", "staccato":"number", "trill":"number", "mordent":"number", "turn":"number", "sslur":"number", "eslur":"number", "ppitch":"number", "pqstart":"number", "ptstart":"number", "pqdur":"number", "ptdur":"number", "npitch":"number", "nqstart":"number", "ntstart":"number", "nqdur":"number", "ntdur":"number"}
+         }
+         },
+         "datasets": {
+         "LegendData": [
+         {
+           "label": "Slur beginning",
+           "x_min": 1,
+           "y_med": 240
+         },
+         {
+           "label": "Note",
+           "x_min": 1,
+           "y_med": 220
+         },
+         {
+           "label": "Slur end",
+           "x_min": 1,
+           "y_med": 200
+         },
+         {
+           "label": "Staccato",
+           "x_min": 1,
+           "y_med": 180
+         }
+         ]
+         },
+         "transform": [
+         {"calculate": "if(datum.group==1, -1, 0)", "as": "NotesA"},
+         {"calculate": "if(datum.group==2, 1, 0)", "as": "NotesBX"},
+         {"calculate": "if(datum.accent==1, 1, 0)", "as": "Category"},
+         {"calculate": "if(datum.marcato==1, 2, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.sforzando==1, 3, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.tenuto==1, 4, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.staccato==1, 5, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.trill==1, 6, datum.Category)", "as": "Category"},{"calculate": "if(datum.mordent==1, 7, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.turn==1, 8, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.sslur==1, 9, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.eslur==1, 10, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.eslur==0 && datum.sslur==0 && datum.turn==0 && datum.mordent==0 && datum.trill==0 && datum.staccato==0 && datum.tenuto==0 && datum.sforzando==0 && datum.marcato==0 && datum.accent==0, 11, datum.Category)", "as": "Category"}
+         ],
+         "hconcat": [
+         {
+         "layer": [    
+           {
+             "mark": {
+               "type": "bar"
+             },
+             "encoding": {
+               "x": {
+                 "field": "tstart",
+                 "type": "ordinal",
+                 "sort": "ascending",
+                 "title": "Tick Position"
+               },
+               "y": {
+                 "field": "NotesBX",
+                 "type": "quantitative",
+                 "impute": {"value": 0},
+                 "title": "Group A",
+                 "sort": null
+               },
+               "color": {
+                 "field": "Category",
+                 "type": "nominal",
+                 "legend": null
+               }
+             },
+             "transform": [{"filter": {"selection": "legendB"}}]      
+           },
+           {   
+             "mark": {
+               "type": "bar"
+             },
+             "encoding": {
+               "x": {
+                 "field": "tstart",
+                 "type": "ordinal",
+                 "sort": "ascending"
+               },
+               "y": {
+                 "field": "NotesA",
+                 "type": "quantitative",
+                 "impute": {"value": 0},
+                 "title": "Group B"
+               },
+               "color": {
+                 "field": "Category",
+                 "type": "nominal",
+                 "legend": null
+               }
+             },
+             "transform": [{"filter": {"selection": "legendA"}}]
+           },
+           {
+             "mark": {
+               "type": "rule",
+               "opacity": 1
+             },
+             "encoding": {
+               "y": {
+                 "aggregate": "min",
+                 "field": "qstart",
+                 "type": "quantitative",
+                 "axis": {"format": "(d"}
+               }
+             }
+           }
+         ]
+         },
+         {
+         "mark": {
+         "type": "square"
+         },
+         "encoding": {
+         "color": {
+           "condition": {
+             "type": "nominal",
+             "field": "Category",
+             "legend": null,
+             "selection": "legendA"
+           },
+           "value": "lightgray"
+         },
+         "y": {
+           "type": "nominal",
+           "field": "Category",
+           "title": "Group B",
+           "sort": null,
+           "axis": {
+             "ticks": false,          
+             "labelPadding": 10,
+             "titleAngle": 0,
+             "titleX": 13,
+             "titleY": -10,
+             "labels": true
+           }
+         }
+         },
+         "selection": {
+         "legendA": {
+           "type": "multi",
+           "encodings": ["color"],
+           "on": "click",
+           "toggle": "event.shiftKey",
+           "resolve": "global",
+           "empty": "all"
+         }
+         }
+         },
+         {
+         "width": 100,
+         "height": 140,
+         "mark": {
+           "dx": 0,
+           "dy": 8,
+           "size": 10,
+           "type": "text"
+         },
+         "data": {
+           "name": "LegendData"
+         },
+         "encoding": {
+           "text": {
+             "field": "label",
+             "type": "ordinal"
+           },
+           "x": {
+             "axis": {
+               "labels": false,
+               "domain": false,
+               "ticks": false,
+               "grid": false
+             },          
+             "field": "x_min",
+             "title": null,
+             "scale": {
+               "zero": false
+             },
+             "type": "quantitative"
+           },
+           "y": {
+             "axis": {
+               "labels": false,
+               "domain": false,
+               "ticks": false,
+               "grid": false,
+               "labelPadding": 10,
+               "titleAngle": 0,
+               "titleX": 45,
+               "titleY": -10
+             },
+             "field": "y_med",
+             "type": "quantitative",
+             "title": "On/Off"
+           }
+         }
+         },
+         {
+         "mark": {
+           "type": "square",
+           "opacity": 0.5
+         },
+         "encoding": {
+           "color": {
+             "condition": {
+               "type": "nominal",
+               "field": "Category",
+               "legend": null,
+               "selection": "legendB"
+             },
+             "value": "lightgray"
+           },
+           "y": {
+             "type": "nominal",
+             "field": "Category",
+             "title": "Group A",
+             "sort": null,
+             "axis": {
+               "ticks": false,
+               "labelPadding": 10,
+               "titleAngle": 0,
+               "titleX": 13,
+               "titleY": -10,
+               "labels": false
+             }
+           }
+         },
+         "selection": {
+           "legendB": {
+             "type": "multi",
+             "encodings": ["color"],
+             "on": "click",
+             "toggle": "event.shiftKey",
+             "resolve": "global",
+             "empty": "all"
+           }
+         }
+         }
+         ],
+         "config": {
+         "range": {
+         "category": [
+           "#ef8e3b",
+           "#5079a5",        
+           "#dd565c",
+           "#5da052",
+           "#ecc853",
+           "#ad7aa1",
+           "#ef9ba7",
+           "#9b7461",
+           "#bab0ac"
+         ]
+         },
+         "bar": {
+         "continuousBandSize": 200,
+         "discreteBandSize": 13
+         },
+         "axis": {
+         "titleFontSize": 14
+         },
+         "square": {"size": 120, "strokeWidth": 1.5, "stroke": "#888888"}
+         }
+         };
+         var onoffVis = {
+         "$schema": "https://vega.github.io/schema/vega-lite/v4.0.0-beta.1.json",
+         "title": {
+         "text": "Stacked Accentual Features per Group"
+         },
+         "data": {
+         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/onoff.tsv",
+         "format": {"parse": 
+         {"line": "number", "field":"number", "track":"number", "subtrack":"number", "group":"number", "staff":"number", "measure":"number", "qstart":"number", "tstart":"number", "qdur":"number", "tdur":"number", "pitch":"number", "chord":"number", "accent":"number", "marcato":"number", "sforzando":"number", "tenuto":"number", "staccato":"number", "trill":"number", "mordent":"number", "turn":"number", "sslur":"number", "eslur":"number", "ppitch":"number", "pqstart":"number", "ptstart":"number", "pqdur":"number", "ptdur":"number", "npitch":"number", "nqstart":"number", "ntstart":"number", "nqdur":"number", "ntdur":"number"}
+         }
+         },
+         "datasets": {
+         "LegendData": [
+         {
+           "label": "Slur beginning",
+           "x_min": 1,
+           "y_med": 240
+         },
+         {
+           "label": "Note",
+           "x_min": 1,
+           "y_med": 220
+         },
+         {
+           "label": "Slur end",
+           "x_min": 1,
+           "y_med": 200
+         },
+         {
+           "label": "Staccato",
+           "x_min": 1,
+           "y_med": 180
+         }
+         ]
+         },
+         "transform": [
+         {"calculate": "if(datum.group==1, -1, 0)", "as": "NotesA"},
+         {"calculate": "if(datum.group==2, 1, 0)", "as": "NotesBX"},
+         {"calculate": "if(datum.accent==1, 1, 0)", "as": "Category"},
+         {"calculate": "if(datum.marcato==1, 2, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.sforzando==1, 3, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.tenuto==1, 4, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.staccato==1, 5, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.trill==1, 6, datum.Category)", "as": "Category"},{"calculate": "if(datum.mordent==1, 7, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.turn==1, 8, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.sslur==1, 9, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.eslur==1, 10, datum.Category)", "as": "Category"},
+         {"calculate": "if(datum.eslur==0 && datum.sslur==0 && datum.turn==0 && datum.mordent==0 && datum.trill==0 && datum.staccato==0 && datum.tenuto==0 && datum.sforzando==0 && datum.marcato==0 && datum.accent==0, 11, datum.Category)", "as": "Category"}
+         ],
+         "hconcat": [
+         {
+         "layer": [    
+           {
+             "mark": {
+               "type": "bar"
+             },
+             "encoding": {
+               "x": {
+                 "field": "tstart",
+                 "type": "ordinal",
+                 "sort": "ascending",
+                 "title": "Tick Position"
+               },
+               "y": {
+                 "field": "NotesBX",
+                 "type": "quantitative",
+                 "impute": {"value": 0},
+                 "title": "Group A",
+                 "sort": null
+               },
+               "color": {
+                 "field": "Category",
+                 "type": "nominal",
+                 "legend": null
+               }
+             },
+             "transform": [{"filter": {"selection": "legendB"}}]      
+           },
+           {   
+             "mark": {
+               "type": "bar"
+             },
+             "encoding": {
+               "x": {
+                 "field": "tstart",
+                 "type": "ordinal",
+                 "sort": "ascending"
+               },
+               "y": {
+                 "field": "NotesA",
+                 "type": "quantitative",
+                 "impute": {"value": 0},
+                 "title": "Group B"
+               },
+               "color": {
+                 "field": "Category",
+                 "type": "nominal",
+                 "legend": null
+               }
+             },
+             "transform": [{"filter": {"selection": "legendA"}}]
+           },
+           {
+             "mark": {
+               "type": "rule",
+               "opacity": 1
+             },
+             "encoding": {
+               "y": {
+                 "aggregate": "min",
+                 "field": "qstart",
+                 "type": "quantitative",
+                 "axis": {"format": "(d"}
+               }
+             }
+           }
+         ]
+         },
+         {
+         "mark": {
+         "type": "square"
+         },
+         "encoding": {
+         "color": {
+           "condition": {
+             "type": "nominal",
+             "field": "Category",
+             "legend": null,
+             "selection": "legendA"
+           },
+           "value": "lightgray"
+         },
+         "y": {
+           "type": "nominal",
+           "field": "Category",
+           "title": "Group B",
+           "sort": null,
+           "axis": {
+             "ticks": false,          
+             "labelPadding": 10,
+             "titleAngle": 0,
+             "titleX": 13,
+             "titleY": -10,
+             "labels": true
+           }
+         }
+         },
+         "selection": {
+         "legendA": {
+           "type": "multi",
+           "encodings": ["color"],
+           "on": "click",
+           "toggle": "event.shiftKey",
+           "resolve": "global",
+           "empty": "all"
+         }
+         }
+         },
+         {
+         "width": 100,
+         "height": 140,
+         "mark": {
+           "dx": 0,
+           "dy": 8,
+           "size": 10,
+           "type": "text"
+         },
+         "data": {
+           "name": "LegendData"
+         },
+         "encoding": {
+           "text": {
+             "field": "label",
+             "type": "ordinal"
+           },
+           "x": {
+             "axis": {
+               "labels": false,
+               "domain": false,
+               "ticks": false,
+               "grid": false
+             },          
+             "field": "x_min",
+             "title": null,
+             "scale": {
+               "zero": false
+             },
+             "type": "quantitative"
+           },
+           "y": {
+             "axis": {
+               "labels": false,
+               "domain": false,
+               "ticks": false,
+               "grid": false,
+               "labelPadding": 10,
+               "titleAngle": 0,
+               "titleX": 45,
+               "titleY": -10
+             },
+             "field": "y_med",
+             "type": "quantitative",
+             "title": "On/Off"
+           }
+         }
+         },
+         {
+         "mark": {
+           "type": "square",
+           "opacity": 0.5
+         },
+         "encoding": {
+           "color": {
+             "condition": {
+               "type": "nominal",
+               "field": "Category",
+               "legend": null,
+               "selection": "legendB"
+             },
+             "value": "lightgray"
+           },
+           "y": {
+             "type": "nominal",
+             "field": "Category",
+             "title": "Group A",
+             "sort": null,
+             "axis": {
+               "ticks": false,
+               "labelPadding": 10,
+               "titleAngle": 0,
+               "titleX": 13,
+               "titleY": -10,
+               "labels": false
+             }
+           }
+         },
+         "selection": {
+           "legendB": {
+             "type": "multi",
+             "encodings": ["color"],
+             "on": "click",
+             "toggle": "event.shiftKey",
+             "resolve": "global",
+             "empty": "all"
+           }
+         }
+         }
+         ],
+         "config": {
+         "range": {
+         "category": [
+           "#ef8e3b",
+           "#5079a5",        
+           "#dd565c",
+           "#5da052",
+           "#ecc853",
+           "#ad7aa1",
+           "#ef9ba7",
+           "#9b7461",
+           "#bab0ac"
+         ]
+         },
+         "bar": {
+         "continuousBandSize": 200,
+         "discreteBandSize": 13
+         },
+         "axis": {
+         "titleFontSize": 14
+         },
+         "square": {"size": 120, "strokeWidth": 1.5, "stroke": "#888888"}
+         }
+         };
+         vegaEmbed('#vis', countVis);
+         $('select').change(function() {
+          if (($(this).val()) === "count") {
+            vegaEmbed('#vis', countVis);
+          } else if (($(this).val()) === "onoff") {
+            vegaEmbed('#vis', oldVersion);
+          }
+         });
+      </script>
+   </body>
+</html>

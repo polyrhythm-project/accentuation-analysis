@@ -21,7 +21,7 @@
          "text": "Stacked Accentual Features per Group"
          },
          "data": {
-         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/output.tsv",
+         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/butterfly_plot/output/R129count.tsv",
          "format": {"parse": 
          {"line": "number", "field":"number", "track":"number", "subtrack":"number", "group":"number", "staff":"number", "measure":"number", "qstart":"number", "tstart":"number", "qdur":"number", "tdur":"number", "pitch":"number", "chord":"number", "accent":"number", "marcato":"number", "sforzando":"number", "tenuto":"number", "staccato":"number", "trill":"number", "mordent":"number", "turn":"number", "sslur":"number", "eslur":"number", "ppitch":"number", "pqstart":"number", "ptstart":"number", "pqdur":"number", "ptdur":"number", "npitch":"number", "nqstart":"number", "ntstart":"number", "nqdur":"number", "ntdur":"number"}
          }
@@ -293,7 +293,7 @@
          "text": "Stacked Accentual Features per Group"
          },
          "data": {
-         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/onoff.tsv",
+         "url": "https://raw.githubusercontent.com/polyrhythm-project/accentuation-analysis/master/plots/butterfly_plot/output/R129onoff.tsv",
          "format": {"parse": 
          {"line": "number", "field":"number", "track":"number", "subtrack":"number", "group":"number", "staff":"number", "measure":"number", "qstart":"number", "tstart":"number", "qdur":"number", "tdur":"number", "pitch":"number", "chord":"number", "accent":"number", "marcato":"number", "sforzando":"number", "tenuto":"number", "staccato":"number", "trill":"number", "mordent":"number", "turn":"number", "sslur":"number", "eslur":"number", "ppitch":"number", "pqstart":"number", "ptstart":"number", "pqdur":"number", "ptdur":"number", "npitch":"number", "nqstart":"number", "ntstart":"number", "nqdur":"number", "ntdur":"number"}
          }
@@ -564,7 +564,7 @@
           if (($(this).val()) === "count") {
             vegaEmbed('#vis', countVis);
           } else if (($(this).val()) === "onoff") {
-            vegaEmbed('#vis', oldVersion);
+            vegaEmbed('#vis', onoffVis);
           }
          });
       </script>
